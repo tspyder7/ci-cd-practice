@@ -9,6 +9,9 @@ on:
 
 jobs:
   enforce-pr-hierarchy:
+    permissions:
+      contents: write
+      pull-requests: write
     uses: tspyder7/github-actions-lib/.github/workflows/enforce-pr-hierarchy.yml@feature/enforce-pr-hierarchy-workflow
     with:
       allowed-branches-hierarchy-json: |
