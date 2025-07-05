@@ -1,0 +1,21 @@
+name: pr-hierarchy
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  enforce-pr-hierarchy:
+    uses: tspyder7/github-actions-lib/.github/workflows/enforce-pr-hierarchy.yml@feature/enforce-pr-hierarchy-workflow
+    with:
+      allowed-branches-hierarchy-json: |
+        {
+          "release": ["main"],
+          "main": ["stage"],
+          "stage": ["development"],
+        }
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
