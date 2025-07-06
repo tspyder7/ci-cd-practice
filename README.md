@@ -4,3 +4,4 @@
 ##### PR from `feature/test-pr-hierarchy2` branch
 
 ##### Test-auto-pr-1
+##### Test-auto-pr-2
