@@ -17,15 +17,9 @@ jobs:
     with:
       allowed-branches-hierarchy-json: |
         {
-            "release": [
-                "main"
-            ],
-            "main": [
-                "stage"
-            ],
-            "stage": [
-                "development"
-            ]
+          "main": [
+              "development"
+          ]
         }
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
