@@ -15,7 +15,7 @@ jobs:
 
     uses: tspyder7/github-actions-lib/.github/workflows/auto-pr.yml@main
     with:
-      pr-branch-hierarchy-json:: |
+      pr-branch-hierarchy-json: |
         {
           "release": [
               "main"
