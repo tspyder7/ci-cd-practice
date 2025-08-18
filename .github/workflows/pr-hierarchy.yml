@@ -13,13 +13,19 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    uses: tspyder7/github-actions-lib/.github/workflows/enforce-pr-hierarchy.yml@feature/enforce-pr-hierarchy-workflow
+    uses: tspyder7/github-actions-lib/.github/workflows/enforce-pr-hierarchy.yml@ci/optimize-logging-enforce-pr-hierarchy
     with:
       allowed-branches-hierarchy-json: |
         {
-          "main": [
-              "development"
-          ]
+            "release": [
+                "main"
+            ],
+            "main": [
+                "stage"
+            ],
+            "stage": [
+                "development"
+            ]
         }
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
