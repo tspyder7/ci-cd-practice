@@ -29,7 +29,6 @@ jobs:
             ]
         }
 
-      auto-close-invalid-prs: false
       comment-template: |
         🚫 **PR Automatically Closed - Branch Hierarchy Violation**
 
