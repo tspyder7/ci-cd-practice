@@ -13,7 +13,7 @@ jobs:
       contents: write
       pull-requests: write
 
-    uses: tspyder7/github-actions-lib/.github/workflows/auto-pr.yml@feature/auto-pr-workflow
+    uses: tspyder7/github-actions-lib/.github/workflows/auto-pr.yml@main
     with:
       pr-branch-hierarchy-json: |
         {
