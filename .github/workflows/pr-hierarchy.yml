@@ -30,6 +30,13 @@ jobs:
         }
 
       auto-close-invalid-prs: false
+      comment-template: |
+        🚫 **PR Automatically Closed - Branch Hierarchy Violation**
+
+        **Issue**: This pull request violates the configured branch hierarchy rules.
+
+        *This action was performed automatically by the branch hierarchy enforcement workflow.*
+
 
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
