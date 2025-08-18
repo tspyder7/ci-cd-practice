@@ -19,14 +19,17 @@ jobs:
       allowed-branches-hierarchy-json: |
         {
             "release": [
-                "main"
+                "main", "test"
             ],
             "main": [
-                "stage"
+                "stage", "test"
             ],
             "stage": [
-                "development"
+                "development", "test"
             ]
         }
+
+      auto-close-invalid-prs: false
+
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
