@@ -14,7 +14,7 @@ jobs:
       contents: write
       pull-requests: write
 
-    uses: tspyder7/github-actions-lib/.github/workflows/enforce-pr-hierarchy.yml@ci/optimize-logging-enforce-pr-hierarchy
+    uses: tspyder7/github-actions-lib/.github/workflows/enforce-pr-hierarchy.yml@main
     with:
       allowed-branches-hierarchy-json: |
         {
