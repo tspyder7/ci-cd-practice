@@ -1,0 +1,11 @@
+name: Test Custom Timeout Caller
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-custom-timeout:
+   
+    uses: tspyder7/github-actions-lib/.github/workflows/custom-timeout.yml@chore/custom-timeout
+    with:
+      timeout_minutes: 1
