@@ -8,4 +8,4 @@ jobs:
    
     uses: tspyder7/github-actions-lib/.github/workflows/custom-timeout.yml@chore/custom-timeout
     with:
-      timeout_minutes: 1
+      timeout_minutes: 3
