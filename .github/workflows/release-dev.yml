@@ -16,12 +16,23 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: write
+    outputs:
+      branch-name: ${{ steps.get-branch.outputs.branch-name }}
+      release-version: ${{ steps.release-please.outputs.version }}
 
     steps:
       - name: Checkout development branch
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.branch }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Get current branch name
+        id: get-branch
+        run: |
+          echo "branch-name=${{ github.event.inputs.branch }}" >> $GITHUB_OUTPUT
+          echo "Working on branch: ${{ github.event.inputs.branch }}"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -29,24 +40,30 @@ jobs:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org/'
 
-      - name: Run `release-please` in direct mode
+      - name: Configure Git
         run: |
-          # Run release-please in “no-pull-request” mode and output JSON
-          out=$(npx release-please release \
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Run release-please for version bump
+        id: release-please
+        run: |
+          # Run release-please to get version bump and commit directly
+          npx release-please release \
             --token=${{ secrets.GITHUB_TOKEN }} \
-            --default-branch=${{ github.event.inputs.branch }} \
+            --target-branch=${{ github.event.inputs.branch }} \
             --release-type=node \
-            --prerelease-id=dev \
-            --create-release-branch \
-            --release-branch="release-\${version}" \
-            --skip-tag \
-            --no-pull-request \
-            --json)
+            --prerelease \
+            --prerelease-type=dev \
+            --skip-github-release \
+            --include-v-in-tag=false
 
-          # Extract branch name & version
-          branch=$(echo "$out" | jq -r .branchName)
-          version=$(echo "$out" | jq -r .version)
+          # Get the new version from package.json after release-please runs
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "New version: $NEW_VERSION"
 
-          # Persist for downstream steps
-          echo "RELEASE_BRANCH=$branch" >> $GITHUB_ENV
-          echo "RELEASE_VERSION=$version" >> $GITHUB_ENV
+      - name: Display results
+        run: |
+          echo "Branch: ${{ steps.get-branch.outputs.branch-name }}"
+          echo "Release Version: ${{ steps.release-please.outputs.version }}"
