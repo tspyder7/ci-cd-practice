@@ -1,0 +1,25 @@
+name: test-sleep-action
+
+on:
+  workflow_dispatch:
+    
+jobs:
+  test-sleep:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test-1 details
+        run: |
+          echo "Calling sleep-for-while without params"
+
+      - name: call sleep-for-while
+        uses: tspyder7/github-actions-lib/.github/actions/sleep-for-while@feat/action-generator
+
+      - name: test-2 details- name
+        run: |
+          echo "Calling sleep-for-while without params"
+
+      - name: call sleep-for-while with params
+        uses: tspyder7/github-actions-lib/.github/actions/sleep-for-while@feat/action-generator
+        with:
+          sleep_time: 10
+          message: "Done waiting!"
