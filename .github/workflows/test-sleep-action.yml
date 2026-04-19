@@ -22,7 +22,7 @@ jobs:
 
       - name: call sleep-for-while
         id: test-1
-        uses: tspyder7/github-actions-lib/.github/actions/sleep-for-while@feat/action-generator
+        uses: tspyder7/github-actions-lib/actions/sleep-for-while@feat/action-generator
 
       - name: test-2 details- name
         id: td-2
@@ -31,7 +31,7 @@ jobs:
 
       - name: call sleep-for-while with params
         id: test-2
-        uses: tspyder7/github-actions-lib/.github/actions/sleep-for-while@feat/action-generator
+        uses: tspyder7/github-actions-lib/actions/sleep-for-while@feat/action-generator
         with:
           sleep_time: 15
           message: "I waited for 15 sec"
