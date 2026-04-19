@@ -5,24 +5,38 @@ on:
   push:
     branches:
       - test/sleep-for-while
-    
+
 jobs:
   test-sleep:
     runs-on: ubuntu-latest
     steps:
+      - name: start-test
+        id: start
+        run: |
+          echo "🤖: Test Started"
+
       - name: test-1 details
+        id: td-1
         run: |
           echo "Calling sleep-for-while without params"
 
       - name: call sleep-for-while
+        id: test-1
         uses: tspyder7/github-actions-lib/.github/actions/sleep-for-while@feat/action-generator
 
       - name: test-2 details- name
+        id: td-2
         run: |
           echo "Calling sleep-for-while without params"
 
       - name: call sleep-for-while with params
+        id: test-2
         uses: tspyder7/github-actions-lib/.github/actions/sleep-for-while@feat/action-generator
         with:
           sleep_time: 15
           message: "I waited for 15 sec"
+
+      - name: end-test
+        id: end
+        run: |
+          echo "🤖: Test Completed"
