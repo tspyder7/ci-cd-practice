@@ -24,7 +24,7 @@ jobs:
         id: test-1
         uses: tspyder7/github-actions-lib/.github/actions/action-generator@feat/action-generator
         with:
-          action-type: publish
+          actionType: publish
           uses: tspyder7/github-actions-lib/.github/actions/sleep-for-while@feat/action-generator
 
       - name: log publish action
@@ -56,7 +56,7 @@ jobs:
         id: test-2
         uses: tspyder7/github-actions-lib/.github/actions/action-generator@feat/action-generator
         with:
-          action-type: publish
+          actionType: publish
           uses: tspyder7/github-actions-lib/.github/actions/sleep-for-while@feat/action-generator
           with: |
             {
