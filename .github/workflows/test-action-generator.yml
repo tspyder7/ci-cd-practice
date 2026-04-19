@@ -22,10 +22,10 @@ jobs:
 
       - name: call action-generator
         id: test-1
-        uses: tspyder7/github-actions-lib/.github/actions/action-generator@feat/action-generator
+        uses: tspyder7/github-actions-lib/actions/action-generator@feat/action-generator
         with:
           actionType: publish
-          uses: tspyder7/github-actions-lib/.github/actions/sleep-for-while@feat/action-generator
+          uses: tspyder7/github-actions-lib/actions/sleep-for-while@feat/action-generator
 
       - name: log publish action
         run: cat .github/actions/publish/action.yml
@@ -55,10 +55,10 @@ jobs:
 
       - name: call sleep-for-while with params
         id: test-2
-        uses: tspyder7/github-actions-lib/.github/actions/action-generator@feat/action-generator
+        uses: tspyder7/github-actions-lib/actions/action-generator@feat/action-generator
         with:
           actionType: publish
-          uses: tspyder7/github-actions-lib/.github/actions/sleep-for-while@feat/action-generator
+          uses: tspyder7/github-actions-lib/actions/sleep-for-while@feat/action-generator
           with: |
             {
               "sleep_time": ${{ steps.td-2.outputs.time }},
