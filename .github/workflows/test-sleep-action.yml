@@ -2,6 +2,9 @@ name: test-sleep-action
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - test/sleep-for-while
     
 jobs:
   test-sleep:
