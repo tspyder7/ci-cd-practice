@@ -60,7 +60,7 @@ jobs:
           uses: tspyder7/github-actions-lib/.github/actions/sleep-for-while@feat/action-generator
           with: |
             {
-              "sleep_time": 15
+              "sleep_time": 15,
               "message": "Test-2: I waited for 15 sec"
             }
 
