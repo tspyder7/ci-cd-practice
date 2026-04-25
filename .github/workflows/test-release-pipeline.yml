@@ -14,7 +14,7 @@ on:
         default: latest
   push:
     branches:
-      - test/release-pipeline
+      - main
 
 jobs:
   release:
