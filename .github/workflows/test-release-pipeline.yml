@@ -5,7 +5,12 @@ on:
     inputs:
       release-type:
         description: "Release type (rc, alpha, beta, latest)"
-        type: string
+        type: choice
+        options:
+          - rc
+          - alpha
+          - beta
+          - latest
         default: latest
   push:
     branches:
