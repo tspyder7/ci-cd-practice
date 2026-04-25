@@ -1,0 +1,69 @@
+name: Development Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to release from'
+        required: false
+        default: 'development'
+
+jobs:
+  generate-release-changelogs:
+    name: Generate Release Changelogs for ${{ inputs.branch }}
+    if: ${{ github.event.inputs.branch == 'development' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    outputs:
+      branch-name: ${{ steps.get-branch.outputs.branch-name }}
+      release-version: ${{ steps.release-please.outputs.version }}
+
+    steps:
+      - name: Checkout development branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Get current branch name
+        id: get-branch
+        run: |
+          echo "branch-name=${{ github.event.inputs.branch }}" >> $GITHUB_OUTPUT
+          echo "Working on branch: ${{ github.event.inputs.branch }}"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org/'
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Run release-please for version bump
+        id: release-please
+        run: |
+          # Run release-please to get version bump and commit directly
+          npx release-please release \
+            --token=${{ secrets.GITHUB_TOKEN }} \
+            --target-branch=${{ github.event.inputs.branch }} \
+            --release-type=node \
+            --prerelease \
+            --prerelease-type=dev \
+            --skip-github-release \
+            --include-v-in-tag=false
+
+          # Get the new version from package.json after release-please runs
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "New version: $NEW_VERSION"
+
+      - name: Display results
+        run: |
+          echo "Branch: ${{ steps.get-branch.outputs.branch-name }}"
+          echo "Release Version: ${{ steps.release-please.outputs.version }}"
