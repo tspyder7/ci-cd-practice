@@ -1,15 +1,15 @@
 name: Test release pipeline
 
 on:
-  push:
-    branches:
-      - test/release-pipeline
   workflow_dispatch:
     inputs:
       release-type:
         description: "Release type (rc, alpha, beta, latest)"
         type: string
         default: latest
+  push:
+    branches:
+      - test/release-pipeline
 
 jobs:
   release:
