@@ -9,6 +9,7 @@ on:
         default: latest
   push:
     branches:
+      - main
       - test/release-pipeline
 
 jobs:
