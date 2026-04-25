@@ -1,4 +1,4 @@
-name: Test Custom Timeout Caller
+name: Test release pipeline
 
 on:
   push:
@@ -13,7 +13,7 @@ on:
 
 jobs:
   release:
-    uses: your-org/github-actions-lib/.github/workflows/release-pipeline.yml@main
+    uses: tspyder7/github-actions-lib/.github/workflows/release-pipeline.yml@main
     with:
       environment: production
       release-type: ${{ inputs.release-type }}
