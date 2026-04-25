@@ -13,6 +13,10 @@ on:
 
 jobs:
   release:
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
     uses: tspyder7/github-actions-lib/.github/workflows/release-pipeline.yml@feat/release-pipeline
     with:
       environment: production
