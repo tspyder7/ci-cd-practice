@@ -17,7 +17,7 @@ jobs:
       contents: write
       pull-requests: write
       actions: write
-    uses: tspyder7/github-actions-lib/.github/workflows/release-pipeline.yml@main
+    uses: tspyder7/github-actions-lib/.github/workflows/release-pipeline.yml@feat/release-pipeline
     with:
       environment: production
       release-type: ${{ inputs.release-type }}
