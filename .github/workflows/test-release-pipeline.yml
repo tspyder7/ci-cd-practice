@@ -13,6 +13,10 @@ on:
 
 jobs:
   release:
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
     uses: tspyder7/github-actions-lib/.github/workflows/release-pipeline.yml@main
     with:
       environment: production
@@ -25,3 +29,5 @@ jobs:
             "message": "Slept for 10 seconds. Release is complete"
           }
         }
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_REPO_TOKEN  }}
